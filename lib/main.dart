@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:iot_app/Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -97,12 +99,59 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Expanded(
+              flex: 4,
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  '智慧路燈',
+                  style: TextStyle(fontSize: 56),
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Expanded(
+              flex: 6,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextField(
+                            maxLength: 20,
+                            maxLines: 1,
+                            autofocus: true,
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.lightBlueAccent),
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
+                              hintText: '裝置名稱',
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30))
+                              ),
+                            ),
+                          ),
+                        ),
+                        RaisedButton(
+                          child: Text('開始使用',style: TextStyle(fontSize: 28)),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: HomePage(title: "apple"),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
